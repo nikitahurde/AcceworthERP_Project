@@ -1,0 +1,652 @@
+@include('admin.include.header')
+
+<style type="text/css">
+  p{
+    font-size: 10px;
+  }
+  table,th{
+    font-size: 10px;
+    padding : 5px 5px 5px 5px;
+  }
+  table,td{
+    padding : 5px 5px 5px 5px;
+  }
+
+  .partyDetail td{
+      width: 50%;
+  }
+  .table_highlight{
+      margin-bottom: 0px;
+      border-left: 1px solid lightgrey;
+      border-right: 1px solid lightgrey;
+      border-top: 1px solid lightgrey;
+      border-bottom: 1px solid lightgrey;
+  }
+  .td_style{
+    padding-top:3px;
+    font-size: 11px;
+  }
+  .text_size{
+    font-weight: bold;
+  }
+  .setpadding{
+    padding-top: 3px;
+  }
+  .bodyTextS{
+      font-size: 11px;
+  }
+  .textRightS{
+    text-align: right;
+  }
+  .textleftS{
+    text-align: left;
+  }
+  .headingStyle{
+    border-bottom: 1px solid lightgrey;
+  }
+  .removeSpace{
+    padding-top: -2px;
+  }
+  .removeSpacetax{
+    padding-top: 2px;
+    padding-bottom: 2px;
+    vertical-align: middle;
+  }
+  .removeExtraSpace{
+    padding-top: -2px;
+    padding-bottom:-4px;
+  }
+</style>
+
+
+<?php  
+          $compName      = Session::get('company_name');
+          $compSplit     = explode('-',$compName);
+          $fycode        = $dataheadB[0]->FY_CODE;
+          $fiscalYr      = explode('-', $fycode); 
+          $series_code   = $dataheadB[0]->SERIES_CODE; 
+          $transDate     = $dataheadB[0]->VRDATE;
+          $vr_Date       = date("d-m-Y", strtotime($transDate));
+          $partyDate     = $dataheadB[0]->PREFDATE;
+    
+          if($partyDate == '0000-00-00'){
+            $partyRef_Date ='00-00-0000';
+          }else{
+            $partyRef_Date = date("d-m-Y", strtotime($partyDate));
+          }
+          
+           ?>
+<table class="table table-bordered partyDetail" style="margin-bottom: 0px;">
+    <tr>
+      <th style="text-align: center;font-size: 15px;"> {{$pdfName}} </th>
+    </tr>
+</table>
+<table class="table table_highlight">
+    
+    <tr class="table_highlight">
+
+      <td class="removeSpaceLogo" style="width:10%;">
+        <table>
+            <tr><td><img src="{{ asset('public/dist/img/MUKUNDGROUPLOGO.png') }}" style="width:75px;height:75px;" alt="job image" title="job image"></td></tr>
+            <tr><td>&nbsp;</td></tr>
+        </table>
+      </td>
+
+      <td class="removeSpaceLogo" style="width:50%;">
+        <table>
+            <tr><td class="" style="font-size: 14px;font-weight: bold;"><?php echo $compDetail[0]->COMP_NAME ?></td></tr>
+            <tr><td class="removeSpace" style="font-size: 12px;"><?php echo $compDetail[0]->ADD1 ?> <?php echo $compDetail[0]->ADD2 ?> <?php echo $compDetail[0]->ADD3 ?><?php echo ' '.$compDetail[0]->CITY.','.$compDetail[0]->PIN_CODE.','.$compDetail[0]->STATE_NAME ?></td></tr>
+            <tr><td>&nbsp;</td></tr>
+        </table>
+      </td>
+
+      <td class="removeSpace" style="width: 40%;border-left: 1px solid lightgrey;">
+        <table>
+          <tr>
+            <th colspan="3" style="font-size: 14px;">ORIGINAL</th>
+          </tr>
+          <?php if($compDetail[0]->CIN_NO){ ?>
+          <tr>
+            <th>CIN NO</th>
+            <th>:</th>
+            <td><?php echo $compDetail[0]->CIN_NO; ?></td>
+          </tr>
+          <?php } ?>
+          <?php if($compDetail[0]->PAN_NO){ ?>
+          <tr>
+            <th class="removeSpace">PAN NO</th>
+            <th class="removeSpace">:</th>
+            <td class="removeSpace"><?php echo $compDetail[0]->PAN_NO; ?></td>
+          </tr>
+          <?php } ?>
+          <?php if($dataheadB[0]->GST_NO){ ?>
+          <tr>
+            <th class="removeSpace">GST NO</th>
+            <th class="removeSpace">:</th>
+            <td class="removeSpace"><?php echo $dataheadB[0]->GST_NO ?></td>
+          </tr>
+          <?php } ?>
+          <tr>
+            <th class="removeSpace"><?php echo $vrPName; ?></th>
+            <th class="removeSpace">:</th>
+            <td class="removeSpace"><?php echo $fiscalYr[0].' '.$series_code.' '.$dataheadB[0]->VRNO; ?></td>
+          </tr>
+          <tr>
+            <th class="removeSpace">DATE</th>
+            <th class="removeSpace">:</th>
+            <td class="removeSpace"><?php echo $vr_Date;?></td>
+          </tr>
+          <?php if($dataheadB[0]->PREFNO){ ?>
+          <tr>
+            <th class="removeSpace">PARTY REF. NO</th>
+            <th class="removeSpace">:</th>
+            <td class="removeSpace"><?php echo $dataheadB[0]->PREFNO?></td>
+          </tr>
+          <?php } ?>
+          <tr>
+            <th class="removeSpace">PARTY REF. DATE</th>
+            <th class="removeSpace">:</th>
+            <td class="removeSpace"><?php echo $partyRef_Date;?></td>
+          </tr>
+          <tr>
+            <th class="removeSpace"><?php echo $seirsHeadLine ?></th>
+            <th class="removeSpace">:</th>
+            <td class="removeSpace"> <?php echo $dataheadB[0]->SERIES_CODE?> - <?php echo $dataheadB[0]->SERIES_NAME?></td>
+          </tr>
+          
+        </table>
+      </td>
+    </tr>
+</table>
+
+<table class="table table_highlight">
+    <tr class="table_highlight">
+      <td>
+        <table>
+          <tr>
+            <th class="removeExtraSpace">NAME & ADDRESS OF BUYER</th>
+          </tr>
+        </table>
+      </td>
+      <td style="width: 50%;border-left: 1px solid lightgrey;">
+        <table>
+          <tr>
+            <th class="removeExtraSpace">RECIPIENT CONSINEE'S NAME & ADDRESS</th>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="table_highlight" style="border-bottom-color: white;">
+      <td>
+        <table>
+          <tr>
+            <td style="font-weight: bold;"><?php echo $dataAccDetail[0]->ACC_CODE ?> - <?php echo $dataAccDetail[0]->ACC_NAME ?> </td>
+          </tr>
+          <tr>
+            <td class="removeSpace"><?php echo $dataAccDetail[0]->ADD1; ?></td>
+          </tr>
+        </table>
+      </td>
+      <td style="border-left: 1px solid lightgrey;">
+        <table>
+          <tr>
+            <td style="font-weight: bold;"><?php echo $consinerDetail[0]->ACC_CODE ?> - <?php echo $consinerDetail[0]->ACC_NAME ?></td>
+          </tr>
+          <tr>
+            <td class="removeSpace"><?php echo $consinerDetail[0]->ADD1 ?></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr class="table_highlight">
+      <td class="removeSpace">
+        <table>
+          <tr>
+            <th>STATE</th>
+            <th>:</th>
+            <td><?php echo $dataAccDetail[0]->STATE_NAME ?></td>
+          </tr>
+          <tr>
+            <th class="removeSpace">GSTN  NO</th>
+            <th class="removeSpace">:</th>
+            <td class="removeSpace"><?php echo  $dataAccDetail[0]->GST_NUM; ?></td>
+          </tr>
+          <tr>
+            <th class="removeSpace">PAN  NO</th>
+            <th class="removeSpace">:</th>
+            <td class="removeSpace"><?php echo $dataAccDetail[0]->PAN_NO; ?> </td>
+          </tr>
+          <tr>
+            <th class="removeSpace">EMAIL ID</th>
+            <th class="removeSpace">:</th>
+            <td class="removeSpace"><?php echo $dataAccDetail[0]->EMAIL_ID ?></td>
+          </tr>
+        </table>
+      </td>
+      <td style="border-left: 1px solid lightgrey;" class="removeSpace">
+        <table>
+          <tr>
+            <th>STATE</th>
+            <th>:</th>
+            <td><?php echo $consinerDetail[0]->STATE_NAME ?></td>
+          </tr>
+          <tr>
+            <th class="removeSpace">GSTN  NO</th>
+            <th class="removeSpace">:</th>
+            <td class="removeSpace"><?php echo $consinerDetail[0]->GST_NUM; ?></td>
+          </tr>
+          <tr>
+            <th class="removeSpace">PAN  NO</th>
+            <th class="removeSpace">:</th>
+            <td class="removeSpace"><?php echo $consinerDetail[0]->PAN_NO; ?> </td>
+          </tr>
+          <tr>
+            <th class="removeSpace">EMAIL ID</th>
+            <th class="removeSpace">:</th>
+            <td class="removeSpace"><?php echo $consinerDetail[0]->EMAIL_ID; ?></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+</table>
+
+
+<?php if($pdfName == 'SALES CHALLAN' || $pdfName == 'TAX INVOICE'){ ?>
+<table class="table table_highlight">
+    <tr class="table_highlight">
+      <td>
+        <table>
+          <tr>
+            <td>DISPATCH FROM</td>
+            <td>:</td>
+            <td><?php echo $dataheadB[0]->plant_city; ?></td>
+          </tr>
+          <tr>
+            <td class="removeSpace">TRANSPORTER CODE</td>
+            <td class="removeSpace">:</td>
+            <td class="removeSpace"><?php echo $dataheadB[0]->TRPT_CODE; ?></td>
+          </tr>
+          <tr>
+            <td class="removeSpace">VEHICAL NO</td>
+            <td class="removeSpace">:</td>
+            <td class="removeSpace"><?php echo $dataheadB[0]->VEHICAL_NO; ?></td>
+          </tr>
+          <tr>
+            <td class="removeSpace">E-WAY BIL NO</td>
+            <td class="removeSpace">:</td>
+            <td class="removeSpace"><?php echo $dataheadB[0]->E_WAY_BILL_NO; ?></td>
+          </tr>
+        </table>
+      </td>
+      <td style="width: 50%;border-left: 1px solid lightgrey;">
+        <table>
+          <tr>
+            <td>DISPATCH TO</td>
+            <td>:</td>
+            <td><?php echo $consinerDetail[0]->CITY_CODE; ?></td>
+          </tr>
+          <tr>
+            <td class="removeSpace">SHIPMENT NO</td>
+            <td class="removeSpace">:</td>
+            <td class="removeSpace"><?php echo $consinerDetail[0]->CITY_CODE; ?></td>
+          </tr>
+          <tr>
+            <td class="removeSpace">TRANSPORTER NAME</td>
+            <td class="removeSpace">:</td>
+            <td class="removeSpace"><?php echo $dataheadB[0]->TRPT_NAME; ?></td>
+          </tr>
+          <tr>
+            <td class="removeSpace">LR ON./LR DATE</td>
+            <td class="removeSpace">:</td>
+            <td class="removeSpace"><?php echo $dataheadB[0]->LR_NO; ?></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+</table>
+<?php } ?>
+  <?php $sgst=array(); $cgst =array();$igst =array(); foreach ($dataTax as $row) { 
+
+            if($row->TAXIND_CODE=='SG1'){
+
+              $sgst[] = $row->TAX_AMT;
+              $sgstrate[] = $row->TAX_RATE;
+            }else{
+            }
+
+            if($row->TAXIND_CODE=='CG1'){
+
+              $cgst[] = $row->TAX_AMT;
+              $cgstrate[] = $row->TAX_RATE;
+            }else{
+            
+            }
+
+            if($row->TAXIND_CODE=='IGST'){
+              $igst[] = $row->TAX_AMT;
+              $igstrate[] = $row->TAX_RATE;
+            }else{
+              
+            }
+
+         }
+
+  
+  ?>
+
+      <table id="InwardDispatch" class="table table-bordered" style="margin-bottom: 0px;">
+
+        <thead class="theadC">
+
+          <tr style="padding-top: 20%;text-align: center;">
+            <th class="text-center" style="border-left: 1px solid lightgrey;font-size: 11px;">SR.NO</th>
+            <th class="text-center" style="font-size: 11px;">ITEM DESCRIPTION</th>
+            <th class="text-center" style="font-size: 11px;">HSN</th>
+            <th class="text-center" style="font-size: 11px;">QTY</th>
+            <th class="text-center" style="font-size: 11px;">UM</th>
+            <th class="text-center" style="font-size: 11px;">RATE</th>
+            <!-- <th class="text-center" colspan="2">CGST</th>
+            <th class="text-center" colspan="2">SGST</th>
+            <th class="text-center" colspan="2">IGST</th> -->
+            <th class="text-center" style="font-size: 11px;">BASIC</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="defualtSearch">
+
+     
+          <?php $rowCount = count($dataheadB); ?>
+          <?php  $sum = 0; $bal=0; $sr_no=1; foreach($dataheadB as $key) {
+
+              $bal +=$key->BASICAMT;
+              echo $key->PARTICULAR;
+
+              if($key->tablNme == 'SORDER_HEAD'){
+                  $qunatity = $key->ORDERQTY;
+                  $aQuantity = $key->ORDERAQTY;
+              }else if($key->tablNme == 'SBILL_HEAD'){
+                 $qunatity =$key->QTYISSUED;
+                $aQuantity =$key->AQTYISSUED;
+              }else if($key->tablNme == 'SENQ_HEAD'){
+                 $qunatity =$key->QTYRECD;
+                $aQuantity =$key->AQTYRECD;
+              }else if($key->tablNme == 'SQTN_HEAD'){
+                 $qunatity =$key->QTYISSUED;
+                 $aQuantity =$key->AQTYISSUED;
+              }else if($key->tablNme == 'SCNTR_HEAD'){
+                 $qunatity =$key->QTYISSUED;
+                 $aQuantity =$key->AQTYISSUED;
+              }else if($key->tablNme == 'SCHALLAN_HEAD'){
+                 $qunatity =$key->QTYISSUED;
+                 $aQuantity =$key->AQTYISSUED;
+              }else{
+                $qunatity =0.00;
+                $aQuantity =0.00;
+              }
+           ?>
+
+            <tr style="padding-top: 20%;">
+              <td class="table_highlight" style="border-left: 1px solid lightgrey;width:7%;text-align:center;">{{ $sr_no}}</td>
+              <td class="bodyTextS" style="width:39%;">{{$key->ITEM_NAME}}  <?php if($key->PARTICULAR){echo '[ '.$key->PARTICULAR.' ]';}?></td>
+              <td class="bodyTextS textRightS" style="width:9%;">{{ $key->HSN_CODE }}</td>
+              <td class="bodyTextS textRightS" style="width:14%;">{{ $qunatity }}</td>
+              <td style="width:5%;">{{ $key->UM }}</td>
+              <td class="bodyTextS textRightS" style="width:11%;"> {{$key->RATE}}</td>
+              <td class="bodyTextS textRightS" style="width:15%;">{{$key->BASICAMT}}</td>
+       
+            </tr>
+
+          <?php $sr_no++;$sum++; }   ?>
+
+          <?php $getRow = 9 -$rowCount; for($q=0;$q<$getRow;$q++){ ?>
+            <tr style="border:none;border-left: 1px solid lightgrey;border-right: 1px solid lightgrey;"><td >&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+          <?php } ?>
+        </tbody>
+          
+
+        <tr class="list-item total-row">
+            <th colspan="3" style="border-right-color:white;" class="removeSpacetax"></th>
+            <th colspan="3" class="tableitem removeSpacetax" style="text-align: left;"> Total</th>
+            <td data-label="Grand Total" class="tableitem bodyTextS textRightS removeSpacetax">
+              <?php $bal_amt = number_format((float)$bal, 2, '.', ''); echo $bal_amt; ?>
+            </td>
+        </tr>
+
+        <?php foreach($taxDetail as $taxAm) { if($taxAm->TCFLAG == 'RT'){ ?> 
+
+          <?php if(isset($taxAm->CR_AMT)){ if(($taxAm->CR_AMT != null) || ($taxAm->CR_AMT != 0.00)){ ?>
+
+            <tr class="list-item total-row">
+              
+              <?php if($taxAm->IND_NAME == 'GRAND'){ ?>
+                <th colspan="3" style="border-right-color:white;">Rs. <?php echo $numwords; ?> Only</th>
+                <th colspan="3" class="tableitem textleftS removeSpacetax"> {{$taxAm->IND_NAME}} TOTAL</th>
+              <?php }else if($taxAm->IND_NAME == 'GRAND TOTAL'){?>
+                <th colspan="3" style="border-right-color:white;">Rs. <?php echo $numwords; ?> Only</th>
+                <th colspan="3" class="tableitem textleftS removeSpacetax"> {{$taxAm->IND_NAME}}</th>
+              <?php }else{ ?>
+                <th colspan="3" style="border-right-color:white;"></th>
+                <th colspan="3" class="tableitem textleftS removeSpacetax"> {{$taxAm->IND_NAME}}</th>
+              <?php } ?>
+
+              <td data-label="Grand Total" class="tableitem bodyTextS textRightS removeSpacetax">
+                {{$taxAm->CR_AMT}}
+              </td>
+            </tr>
+
+          <?php } }?>
+
+        <?php }} ?>
+      </table>
+
+      <table class="table table-bordered" style="margin-bottom: 0px;">
+        <tr>
+          <th rowspan="2">HSN</th>
+          <th colspan="2">CGST</th>
+          <th colspan="2">SGST</th>
+          <th colspan="2">IGST</th>
+          <th rowspan="2">TOTAL TAX AMOUNT</th>
+        </tr>
+        <tr>
+          <th>%</th>
+          <th>AMOUNT</th>
+          <th>%</th>
+          <th>AMOUNT</th>
+          <th>%</th>
+          <th>AMOUNT</th>
+        </tr>
+
+          
+            <?php $cgst_total =0;$sgst_total=0;$igst_total=0;foreach($taxDetail as $HsnTAmt) { if($HsnTAmt->TCFLAG == 'R_IT'){
+
+               $cgst_total += $HsnTAmt->cgstamt;
+               $igst_total += $HsnTAmt->igstamt;
+               $sgst_total += $HsnTAmt->sgstamt;
+               $cgst_amt = $HsnTAmt->cgstamt;
+               $igst_amt = $HsnTAmt->igstamt;
+               $sgst_amt = $HsnTAmt->sgstamt;
+               $totalAmt = $cgst_amt + $igst_amt + $sgst_amt;
+               $totalAllAmt = $cgst_total + $igst_total + $sgst_total;
+              ?> 
+              <tr>
+              <td class="bodyTextS" style="width:16%;">{{ $HsnTAmt->IND_CODE }}</td>
+              <td class="bodyTextS textRightS" style="width:8%;">{{ $HsnTAmt->cgstrate }}</td>
+              <td class="bodyTextS textRightS" style="width:15%;">{{ $HsnTAmt->cgstamt }}</td>
+              <td class="bodyTextS textRightS" style="width:8%;">{{ $HsnTAmt->sgstrate }}</td>
+              <td class="bodyTextS textRightS" style="width:15%;">{{ $HsnTAmt->sgstamt }}</td>
+              <td class="bodyTextS textRightS" style="width:8%;">{{ $HsnTAmt->igstrate }}</td>
+              <td class="bodyTextS textRightS" style="width:15%;">{{ $HsnTAmt->igstamt }}</td>
+              <td class="bodyTextS textRightS" style="width:15%;"><?php $floatTot_amt = number_format((float)$totalAmt, 2, '.', ''); echo $floatTot_amt; ?></td>
+              </tr>
+          <?php }} ?>
+          
+          <tr>
+            <td class="bodyTextS">Total</td>
+            <td></td>
+            <td class="bodyTextS textRightS"><?php $cgstTot_amt = number_format((float)$cgst_total, 2, '.', ''); echo $cgstTot_amt; ?></td>
+            <td></td>
+            <td class="bodyTextS textRightS"><?php $sgstTot_amt = number_format((float)$sgst_total, 2, '.', ''); echo $sgstTot_amt; ?></td>
+            <td></td>
+            <td class="bodyTextS textRightS"><?php $igdtTot_amt = number_format((float)$igst_total, 2, '.', ''); echo $igdtTot_amt; ?></td>
+            <td class="bodyTextS textRightS"><?php $floatTotall_amt = number_format((float)$totalAllAmt, 2, '.', ''); echo $floatTotall_amt; ?></td>
+          </tr>
+
+      </table>
+    
+<?php if($pdfName == 'TAX INVOICE'){ ?>
+    <table class="table table_highlight" style="width: 100%;" style="margin-bottom: 0px;">
+      <tr>
+        <th colspan="3" style="border-bottom: 1px solid lightgrey;">TERMS & CONDITIONS : </th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>:</td>
+        <td>
+          All Payments by RTGS / cheques in favor of <?php echo $compDetail[0]->COMP_NAME ?> should be crossed o payees account.
+        </td>
+      </tr>
+      <tr>
+        <td class="removeSpace">2</td>
+        <td class="removeSpace">:</td>
+        <td class="removeSpace">
+          Interest @ 18% per annum will be charged on bills remaining unpaid after <?php echo $dataheadB[0]->DUEDAYS; ?> Days from the date of bill.
+        </td>
+      </tr>
+      <tr>
+        <td class="removeSpace">3</td>
+        <td class="removeSpace">:</td>
+        <td class="removeSpace">
+          Subject To <?php echo $compDetail[0]->CITY; ?> Jurisdiction Only.
+        </td>
+      </tr>
+    </table>
+<?php }else{ ?>
+    <table class="table table_highlight" style="width: 100%;" style="margin-bottom: 0px;">
+      <tr>
+        <th colspan="3" style="border-bottom: 1px solid lightgrey;">TERMS & CONDITIONS : </th>
+      </tr>
+      <?php if($dataConfig[0]->RFHEAD1 && $dataheadB[0]->RFHEAD1){ ?>
+        <tr>
+          <td style="width:20%;"><?php echo $dataConfig[0]->RFHEAD1;?></td>
+          <td style="width:5%;">:</td>
+          <td style="width:75%;"><?php echo $dataheadB[0]->RFHEAD1; ?></td>
+        </tr>
+      <?php }else{ ?>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      <?php } ?>
+      <?php if($dataConfig[0]->RFHEAD2 && $dataheadB[0]->RFHEAD2){ ?>
+        <tr>
+          <td style="width:20%;"><?php echo $dataConfig[0]->RFHEAD2;?></td>
+          <td style="width:5%;">:</td>
+          <td style="width:75%;"><?php echo $dataheadB[0]->RFHEAD2; ?></td>
+        </tr>
+      <?php }else{ ?>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      <?php } ?>
+      <?php if($dataConfig[0]->RFHEAD3 && $dataheadB[0]->RFHEAD3){ ?>
+        <tr>
+          <td style="width:20%;"><?php echo $dataConfig[0]->RFHEAD3;?></td>
+          <td style="width:5%;">:</td>
+          <td style="width:75%;"><?php echo $dataheadB[0]->RFHEAD3; ?></td>
+        </tr>
+      <?php }else{ ?>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      <?php } ?>
+      <?php if($dataConfig[0]->RFHEAD4 && $dataheadB[0]->RFHEAD4){ ?>
+        <tr>
+          <td style="width:20%;"><?php echo $dataConfig[0]->RFHEAD4;?></td>
+          <td style="width:5%;">:</td>
+          <td style="width:75%;"><?php echo $dataheadB[0]->RFHEAD4; ?></td>
+        </tr>
+      <?php }else{ ?>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      <?php } ?>
+      <?php if($dataConfig[0]->RFHEAD5 && $dataheadB[0]->RFHEAD5){ ?>
+        <tr>
+          <td style="width:20%;"><?php echo $dataConfig[0]->RFHEAD5;?></td>
+          <td style="width:5%;">:</td>
+          <td style="width:75%;"><?php echo $dataheadB[0]->RFHEAD5; ?></td>
+        </tr>
+      <?php }else{ ?>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      <?php } ?>
+      
+    </table>
+<?php } ?>
+
+<table class="table table_highlight">
+  <tr>
+    <td style="width:50%;border-left: 1px solid lightgrey;border-bottom: 1px solid lightgrey;">
+      <table class="table" style="margin-bottom:-10px;">
+        <tr>
+          <th class="removeSpace" style="width:25%;">Account Name</th>
+          <td class="removeSpace" style="width:5%;">:</td>
+          <td class="removeSpace" style="width:70%;"><?php echo $bankAccDetail[0]->ACC_NAME; ?></td>
+        </tr>
+        <tr>
+          <th class="removeSpace">Account No</th>
+          <td class="removeSpace">:</td>
+          <td class="removeSpace"><?php echo $bankAccDetail[0]->ACC_NUMBER; ?></td>
+        </tr>
+        <tr>
+          <th class="removeSpace">Name of Bank</th>
+          <td class="removeSpace">:</td>
+          <td class="removeSpace"><?php echo $bankAccDetail[0]->BANK_NAME; ?>,<?php echo $bankAccDetail[0]->BRANCH_NAME; ?></td>
+        </tr>
+        <tr>
+          <th class="removeSpace">IFSC Code</th>
+          <td class="removeSpace">:</td>
+          <td class="removeSpace"><?php echo $bankAccDetail[0]->IFSC_CODE; ?></td>
+        </tr>
+      </table>
+    </td>
+
+    <td style="width:50%;border-right: 1px solid lightgrey;border-bottom: 1px solid lightgrey;">
+      <table class="table" style="margin-bottom:-10px;">
+        <tr>
+          <th class="removeSpace textRightS">For <?php echo $compSplit[1];?></th>
+        </tr>
+        <tr>
+          <th class="removeSpace">&nbsp;</th>
+        </tr>
+        <tr>
+          <th class="removeSpace">&nbsp;</th>
+        </tr>
+        <tr>
+          <th class="removeSpace textRightS">Authorised Signatory</th>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<table style="width:100%;border-collapse: collapse;" class="removeSpace">
+  <tr>
+    <td style="font-size:12px;width:25%;border:1px solid #a5a2a2;padding-left:5px;padding-top:50px;"> Entered by</td>
+    <td style="font-size:12px;width:25%;border:1px solid #a5a2a2;padding-left:5px;padding-top:50px;">Checked By</td>
+    <td style="font-size:12px;width:25%;border:1px solid #a5a2a2;padding-left:5px;padding-top:50px;">Approved By </td>
+    <td style="font-size:12px;width:25%;border:1px solid #a5a2a2;padding-left:5px;padding-top:50px;">Authorised Signatory</td>
+  </tr>
+</table>

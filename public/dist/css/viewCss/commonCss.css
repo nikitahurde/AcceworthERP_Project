@@ -1,0 +1,297 @@
+.panel.with-nav-tabs .panel-heading{
+  padding: 5px 5px 0 5px;
+}
+
+.panel.with-nav-tabs .nav-tabs{
+  border-bottom: none;
+}
+
+.panel.with-nav-tabs .nav-justified{
+  margin-bottom: -1px;
+}
+
+.with-nav-tabs.panel-info .nav-tabs > li > a,
+.with-nav-tabs.panel-info .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-info .nav-tabs > li > a:focus {
+  color: #31708f;
+}
+
+.with-nav-tabs.panel-info .nav-tabs > .open > a,
+.with-nav-tabs.panel-info .nav-tabs > .open > a:hover,
+.with-nav-tabs.panel-info .nav-tabs > .open > a:focus,
+.with-nav-tabs.panel-info .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-info .nav-tabs > li > a:focus {
+  color: #31708f;
+  background-color: #bce8f1;
+  border-color: transparent;
+}
+
+.with-nav-tabs.panel-info .nav-tabs > li.active > a,
+.with-nav-tabs.panel-info .nav-tabs > li.active > a:hover,
+.with-nav-tabs.panel-info .nav-tabs > li.active > a:focus {
+  color: #31708f;
+  background-color: #fff;
+  border-color: #bce8f1;
+  border-bottom-color: transparent;
+}
+
+.with-nav-tabs.panel-info .nav-tabs > li.dropdown .dropdown-menu {
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+.with-nav-tabs.panel-info .nav-tabs > li.dropdown .dropdown-menu > li > a {
+  color: #31708f;   
+}
+
+.with-nav-tabs.panel-info .nav-tabs > li.dropdown .dropdown-menu > li > a:hover,
+.with-nav-tabs.panel-info .nav-tabs > li.dropdown .dropdown-menu > li > a:focus {
+
+  background-color: #bce8f1;
+}
+
+.with-nav-tabs.panel-info .nav-tabs > li.dropdown .dropdown-menu > .active > a,
+.with-nav-tabs.panel-info .nav-tabs > li.dropdown .dropdown-menu > .active > a:hover,
+.with-nav-tabs.panel-info .nav-tabs > li.dropdown .dropdown-menu > .active > a:focus {
+    color: #fff;
+    background-color: #31708f;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+
+    padding: 6px;
+    padding-bottom: 0px !important;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+    text-align: center;
+
+}
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+
+}
+
+.table td, .table th {
+    padding: .75rem;
+    vertical-align: top;
+
+}
+.PageTitle{
+  margin-right: 1px !important;
+}
+.required-field::before {
+  content: "*";
+  color: red;
+}
+.Custom-Box {
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.12), 0 1px 2px 4px rgba(0,0,0,0.08);
+}
+
+.text-center{
+  text-align: center;
+}
+
+
+.boxer {
+  display: table;
+  border-collapse: collapse;
+
+}
+
+.boxer .box-row {
+  display: table-row;
+
+}
+
+.boxer .box-row:first-child {
+  font-weight:bold;
+}
+
+.boxer .box10 {
+  display: table-cell;
+  vertical-align: top;
+  border: 1px solid #ddd;
+  padding: 5px;
+}
+.AddMList{
+width: 40px;
+}
+.aplynotStatus{
+  display: none;
+}
+.AddM{
+  width: 40px;
+}
+.divhsn{
+  color: #3c8dbc;
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 8%;
+}
+.settaxcodemodel{
+  font-size: 16px;
+  font-weight: 800;
+  color: #5d9abd;
+
+}
+.center {
+  text-align:center;
+}
+.right {
+  float:right;
+}
+.tdsratebtn{
+  margin-top: 3% !important;
+  font-weight: 600 !important;
+  font-size: 10px !important;
+}
+.debitcreditbox{
+  width: 91px;
+  text-align: end;
+}
+.credittotldesn{
+  width: 277%;
+  margin-left: -11%;
+  text-align: end;
+}
+.rightcontent{
+  text-align:right;
+}
+.toalvaldesn{
+  text-align: right;
+  font-weight: 800;
+  margin-top: 1%;
+}
+.qpvalInp{
+  vertical-align: middle !important;
+}
+.modltitletext{
+  font-weight: 800;
+  color: #5696bb;
+  text-align: center;
+  font-size: 16px;
+}
+.tdsInputBox{
+  margin-bottom: 2%;
+}
+.itmdetlheading{
+  vertical-align: middle !important;
+  text-align: center;
+}
+.itmdetlheading1{
+  vertical-align: middle !important;
+  text-align: center;
+  width: 40%;
+}
+.texIndbox1{
+  width: 5%; 
+  text-align: center;
+}
+.showSeletedName{
+  font-size: 15px;
+  margin-top: 2%;
+  text-align: center;
+  font-weight: 600;
+  color: #4f90b5;
+}
+.title{
+  margin-top: 50px;
+  margin-bottom: 20px;
+
+}
+.texIndbox{
+  width: 25%; 
+  text-align: center;
+}
+.rateIndbox{
+  width: 15%;
+  text-align: center;
+}
+.rateBox{
+  width: 20%;
+  text-align: center;
+}
+.amountBox{
+  width: 20%;
+  text-align: center;
+}
+.inputtaxInd{
+  background-color: white !important;
+  border: none;
+  text-align: center;
+}
+.taxcodeset{
+  margin-right: 11px !important;
+}
+.SetInCenter{
+  margin-top: 18%;
+}
+.textSizeTdsModl{
+  font-size: 13px;
+}
+.viewbtnitem{
+  padding-bottom: 0px;
+  padding-top: 0px;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+.tdthtablebordr{
+  border: 1px solid #00BB64;
+}
+.inputboxclr{
+  border: 1px solid #d7d3d3;
+}
+.vrnoinbox{
+  width: 10%;
+  text-align: center;
+}
+.itemIndbox{
+  width: 30%;
+  text-align: center;
+}
+.batchNoC{
+  font-weight: 700;
+  width: 57px;
+  margin-top: 1%;
+  margin-right: 2%;
+  color: #3c8dbc;
+}
+.showbatchnum{
+  width: 135px;
+  margin-bottom: 2%;
+  height: 26px;
+}
+.setbatchnoandref{
+  display: flex;
+}
+.texIndbox_vr{
+  width: 12%;
+}
+.texIndbox_itm{
+  width: 20%;
+}
+.getheading{
+  border: none;
+  width: 61px;
+}
+.texIndbox2{
+  width: 45%; 
+  text-align: center;
+}
